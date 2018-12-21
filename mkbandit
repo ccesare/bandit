@@ -1,0 +1,10 @@
+#!/usr/bin/zsh
+
+NEW_BANDIT=bandit$1
+OLD_BANDIT=bandit$(($1-1))
+
+mkdir $NEW_BANDIT
+cp $OLD_BANDIT/$OLD_BANDIT.py $NEW_BANDIT/$NEW_BANDIT.py
+cd $NEW_BANDIT
+#echo $NEW_BANDIT
+#echo $OLD_BANDIT
