@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 NEW_BANDIT=bandit$1
 OLD_BANDIT=bandit$(($1-1))
@@ -6,7 +6,8 @@ BANDIT_STRING="BANDIT = $(($1-1))"
 
 mkdir $NEW_BANDIT
 cp $OLD_BANDIT/$OLD_BANDIT.py $NEW_BANDIT/$NEW_BANDIT.py
-sed -i "s/$BANDIT_STRING/BANDIT = $1/" $NEW_BANDIT/$NEW_BANDIT.py
-sed -i "s/payload\ =.*/payload = \"\/bin\/echo \\\\\"Edit the payload string in $NEW_BANDIT.py\\\\\"\"/" $NEW_BANDIT/$NEW_BANDIT.py
+sed -i ".old" "s/$BANDIT_STRING/BANDIT = $1/" $NEW_BANDIT/$NEW_BANDIT.py
+sed -i ".old" "s/payload\ =.*/payload = \"\/bin\/echo \\\\\"Edit the payload string in $NEW_BANDIT.py\\\\\"\"/" $NEW_BANDIT/$NEW_BANDIT.py
+rm $NEW_BANDIT/$NEW_BANDIT.py.old
 #echo $NEW_BANDIT
 #echo $OLD_BANDIT
