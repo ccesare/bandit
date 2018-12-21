@@ -1,4 +1,11 @@
 from pwn import *
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", "--interactive",
+                    help="open an interactive shell on host",
+                    action="store_true")
+args = parser.parse_args()
 
 BANDIT = 1
 
@@ -11,11 +18,13 @@ user = "bandit" + str(BANDIT)
 
 conn = ssh(user, server, password=pw, port=server_port)
 
-#conn.interactive()
+if args.interactive:
+    conn.interactive()
+else:
+    payload = "cat ./-"
+    password = conn.process(payload, shell=True).recvall()
 
-password = conn.process("cat ./-", shell=True).recvall()
+    with open("password", "w") as pass_file:
+        pass_file.write(password)
 
-with open("password", "w") as pass_file:
-    pass_file.write(password)
-
-print password.replace("\n", "")
+    print password.replace("\n", "")
