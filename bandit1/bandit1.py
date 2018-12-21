@@ -5,11 +5,11 @@ BANDIT = 1
 with open("../bandit" + str(BANDIT - 1) + "/password", "r") as old_pass:
     pw = old_pass.read().replace("\n", "")
 
-user = "bandit" + str(BANDIT)
 server = "bandit.labs.overthewire.org"
-#port = 2220
+server_port = 2220
+user = "bandit" + str(BANDIT)
 
-conn = ssh(user, server, password=pw, port=2220)
+conn = ssh(user, server, password=pw, port=server_port)
 
 #conn.interactive()
 

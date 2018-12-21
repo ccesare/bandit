@@ -1,11 +1,13 @@
 from pwn import *
 
-user = "bandit0"
-pw = "bandit0"
-server = "bandit.labs.overthewire.org"
-#port = 2220
+BANDIT = 0
 
-conn = ssh(user, server, password=pw, port=2220)
+server = "bandit.labs.overthewire.org"
+server_port = 2220
+user = "bandit" + str(BANDIT)
+pw = "bandit" + str(BANDIT)
+
+conn = ssh(user, server, password=pw, port=server_port)
 
 password = conn.process("cat readme", shell=True).recvall()
 
