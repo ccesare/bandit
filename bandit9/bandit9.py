@@ -1,4 +1,4 @@
-from pwn import *
+from pwn import * # pylint: disable=unused-import
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -21,7 +21,7 @@ conn = ssh(user, server, password=pw, port=server_port)
 if args.interactive:
     conn.interactive()
 else:
-    payload = "/bin/echo \"Edit the payload string in bandit9.py\""
+    payload = "strings data.txt | grep === | grep yyJ | sed \"s/=//g\" | sed \"s/ //g\""
     password = conn.process(payload, shell=True).recvall()
 
     with open("password", "w") as pass_file:
